@@ -1,0 +1,131 @@
+--http管理器
+HttpManager = {}
+local this = HttpManager
+
+this.HttpFinishs = {}
+this.HttpFiles = {}
+this.HttpFilesExtra = {}
+this.HttpErrors = {}
+
+--Http请求
+function HttpManager.Request(_url,params,content,finishCallback,errorCallback)
+     weburl = "http://"..Address..":"..webport.."/web/";
+    log("===http request url==="..weburl.._url);
+    local www = nil;
+    if(params == nil) then
+        www = WWW(weburl.._url);
+    else
+        local wwwform = WWWForm();
+        for key,value in pairs(params) do
+            wwwform:AddField(key,value)
+        end
+        www = WWW(weburl.._url,wwwform);
+    end
+    this.HttpFinishs[www] = finishCallback;
+    this.HttpErrors[www] = errorCallback;
+
+	EventManager.InvokeEvent(SetLoadActive,true);
+end
+
+--Http请求下载指定文件
+function HttpManager.Upload(_url,params,content,finishCallback,errorCallback,extra)
+     weburl = "http://"..Address..":"..webport.."/web/";
+    log("===http request url==="..weburl.._url);
+    local www = nil;
+    if(params == nil) then
+        www = WWW(weburl.._url);
+    else
+        local wwwform = WWWForm();
+        for key,value in pairs(params) do
+            wwwform:AddField(key,value)
+        end
+        www = WWW(weburl.._url,wwwform);
+    end
+    this.HttpFiles[www] = finishCallback;
+    this.HttpFilesExtra[www] = extra;
+    this.HttpErrors[www] = errorCallback;
+end
+
+--Http上传指定文件
+function HttpManager.PostFile(_url,params,bytes,finishCallback,errorCallback)
+     weburl = "http://"..Address..":"..webport.."/web/";
+    log("===http request url==="..weburl.._url);
+    local www = nil;
+
+    local wwwform = WWWForm();
+    for key,value in pairs(params) do
+        wwwform:AddField(key,value)
+    end
+    wwwform:AddBinaryData("data",bytes);
+    www = WWW(weburl.._url,wwwform);
+
+    this.HttpFinishs[www] = finishCallback;
+    this.HttpErrors[www] = errorCallback;
+    EventManager.InvokeEvent(SetLoadActive,true);
+end
+
+function HttpManager.Update()
+    for key,value in pairs(this.HttpFinishs) do
+        local download = key;
+        --http请求失败
+        if (download.error ~= nil) then
+            log("Download error  "..download.error);
+            this.HttpFinishs[download] = nil;
+            this.HttpErrors[download] = nil;
+            EventManager.InvokeEvent(UINormalTip,{"连接不上服务器"});
+            EventManager.InvokeEvent(SetLoadActive,false);
+        else
+            --http请求成功
+            if (download.isDone and download.error == nil) then
+                log(download.url.."====Downloading finish====");
+                local data = download.text;
+                local obj = json.decode(data);
+                local msgid = obj["msgid"];
+                if(tonumber(msgid) == 10000) then
+                    local msg = obj["msg"];
+                    EventManager.InvokeEvent(UINormalTip,{msg});
+                else
+                    local finishCallback = this.HttpFinishs[download];
+                    if(finishCallback ~= nil) then
+                        finishCallback(download.text);
+                    end
+                end
+                this.HttpFinishs[download] = nil;
+                this.HttpErrors[download] = nil;
+                EventManager.InvokeEvent(SetLoadActive,false);
+            end
+        end
+    end
+
+    for key,value in pairs(this.HttpFiles) do
+        local download = key;
+        --http请求失败
+        if (download.error ~= nil) then
+            log("Download error  "..download.error);
+            this.HttpFilesExtra[download] = nil;
+            this.HttpFiles[download] = nil;
+            this.HttpErrors[download] = nil;
+            EventManager.InvokeEvent(UINormalTip,{"连接不上服务器"});
+            EventManager.InvokeEvent(SetLoadActive,false);
+        else
+            --http请求成功
+            if (download.isDone and download.error == nil) then
+                log(download.url.."====Downloading finish====");
+                local data = download.text;
+                log("=====download text===="..data);
+                local obj = json.decode(data);
+                if(obj == nil) then
+                    local extra = this.HttpFilesExtra[download];
+                    local finishCallback = this.HttpFiles[download];
+                    if(finishCallback ~= nil) then
+                        finishCallback(this.HttpFilesExtra[download],download.bytes);
+                    end
+                end
+                this.HttpFilesExtra[download] = nil;
+                this.HttpFiles[download] = nil;
+                this.HttpErrors[download] = nil;
+                EventManager.InvokeEvent(SetLoadActive,false);
+            end
+        end
+    end
+end

@@ -1,0 +1,119 @@
+pkpanel = {};
+local this = pkpanel;
+
+local gameObject;
+local transform;
+local message;
+
+function pkpanel.Awake(obj)
+    gameObject = obj;
+    transform = obj.transform;
+    message = obj:GetComponent("LuaBehaviour");
+
+    this.initComponent();
+    this.regPkEvents();
+end
+
+function pkpanel.regPkEvents()
+    EventManager.RegisterEvent(UISetPkState,this.SetPlayerState);
+	EventManager.RegisterEvent(UIPkFaPai,this.GeneratePais);
+	EventManager.RegisterEvent(UIShowReadyBtn,this.SetReadyBtn);
+	EventManager.RegisterEvent(UIShowJiaoImg,this.ShowJiaoImg);
+	EventManager.RegisterEvent(UIShowDuringChuPai,this.ShowDuringChuPai);
+	EventManager.RegisterEvent(UIShowChuPaiAnim,this.ShowChuPaiAnim);
+	EventManager.RegisterEvent(UIMovePaiTransToCenter,this.MovePaiTransToCenter);
+	EventManager.RegisterEvent(UIMovePaiTransToPlayer,this.MovePaiTransToPlayer);
+end
+
+function pkpanel.destroyEvents()
+    EventManager.UnRegisterEvent(UISetPkState);
+	EventManager.UnRegisterEvent(UIPkFaPai);
+	EventManager.UnRegisterEvent(UIShowReadyBtn);
+	EventManager.UnRegisterEvent(UIShowJiaoImg);
+	EventManager.UnRegisterEvent(UIShowDuringChuPai);
+	EventManager.UnRegisterEvent(UIShowChuPaiAnim);
+	EventManager.UnRegisterEvent(UIMovePaiTransToCenter);
+	EventManager.UnRegisterEvent(UIMovePaiTransToPlayer);
+end
+
+function pkpanel.initComponent()
+	this.playerTrans = {};
+
+	this.playerTrans[1] = transform:Find("selfPlayerItem");
+	this.otherPlayersTran = transform:Find("otherPlayers");
+	for i=2,this.otherPlayersTran.childCount+1 do
+		local tran = this.otherPlayersTran:Find("player_"..tostring(i).."/pkPlayerItem");
+		this.playerTrans[i] = tran;
+	end
+
+	this.pkCenterTran = transform:Find("pkCenter");
+end
+
+function pkpanel.OnEnable()
+	for key,tran in pairs(this.playerTrans) do
+		tran.gameObject:SetActive(false);
+	end
+
+	this.playerScripts = {};
+	local pkPlayers = PkScene:GetInstance().players;
+	for pos,player in pairs(pkPlayers) do
+		local tran = this.playerTrans[pos];
+		tran.gameObject:SetActive(true);
+		this.playerScripts[pos] = UIManager.addLuaBehaviour(tran.gameObject);
+	end
+
+	this.pkCenterScript = UIManager.addLuaBehaviour(this.pkCenterTran.gameObject);
+end
+
+--生成纸牌
+function pkpanel.GeneratePais()
+	for key,script in pairs(this.playerScripts) do
+		script:Call("GeneratePais");
+	end
+end
+
+--设置玩家的状态
+function pkpanel.SetPlayerState(pos)
+	local pkPlayers = PkScene:GetInstance().players;
+	pkPlayers[pos].state = 1;
+	local script = this.pkPlayerScripts[pos];
+	script:Call("ShowPlayerState",1);
+end
+
+--设置玩家的准备按钮
+function pkpanel.SetReadyBtn(state)
+	local script = this.playerScripts[1];
+	script:Call("SetReadyBtn",state);
+end
+
+--显示玩家叫的数字和个数
+function pkpanel.ShowJiaoImg(pos)
+	local script = this.playerScripts[pos];
+	script:Call("ShowJiaoImg",true);
+end
+
+--显示玩家正在出牌
+function pkpanel.ShowDuringChuPai(pos)
+	local script = this.playerScripts[pos];
+	script:Call("ShowDuringChuPai",true);
+end
+
+--玩家出牌
+function pkpanel.ShowChuPaiAnim(pos)
+	local script = this.playerScripts[pos];
+	script:Call("ShowChuPaiAnim");
+end
+
+--移动玩家的牌到中央
+function pkpanel.MovePaiTransToCenter(paisTran)
+	this.pkCenterScript:Call("MovePaiTransToCenter",paisTran);
+end
+
+--移动中央的牌到玩家
+function pkpanel.MovePaiTransToPlayer(pos)
+	this.pkCenterScript:Call("MovePaiTransToPlayer",pos);
+end
+
+function pkpanel.OnDestroy()
+	this.destroyEvents();
+end

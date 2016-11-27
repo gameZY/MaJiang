@@ -1,0 +1,59 @@
+loginMessage = {}
+local this = loginMessage;
+
+--注册所有消息回包事件
+function loginMessage.RegisterCallBacks()
+    EventManager.RegisterEvent(Heart,NetManager.OnHeart);
+    EventManager.RegisterEvent(Login,NetManager.OnLogin);
+    EventManager.RegisterEvent(ReLogin,NetManager.OnReLogin);
+    EventManager.RegisterEvent(Logout,NetManager.OnLogout);
+end
+
+--清除所有消息回包事件
+function loginMessage.ClearCallBacks()
+    EventManager.UnRegisterEvent(Heart);
+    EventManager.UnRegisterEvent(Login);
+    EventManager.UnRegisterEvent(ReLogin);
+    EventManager.UnRegisterEvent(Logout);
+end
+
+--心跳包回包
+function NetManager.OnHeart()
+	--log("======on heart=====");
+    this.SendHeart();
+end
+
+--注销回包
+function NetManager.OnLogout()
+    GameManager.ResetLogin();
+end
+
+--登陆信息回包
+function NetManager.OnLogin(data)
+    log("=======net login success====");
+	TimerManager.StartHeartTimer();
+	UIManager.createPanel(MainPanel);
+end
+
+--重复登录
+function NetManager.OnReLogin(data)
+    log("=====on repeat login=====");
+    EventManager.InvokeEvent(UINormalTip,{"账号在另一个地方登录",NetManager.ResetLogin});
+end
+
+--发送心跳包
+function NetManager.SendHeart()
+    --log("=====send heart=====");
+    local heart = Login_pb.HeartRequest();
+	heart.state = true;
+    NetManager.SendMessage(200,heart);
+end
+
+--发送登陆包
+function NetManager.SendLogin()
+    log("========send login=====");
+	local login = Login_pb.LoginRequest();
+    login.uid = Player:GetInstance().uid;
+	login.name = Player:GetInstance().name;
+    NetManager.SendMessage(201,login);
+end

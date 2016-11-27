@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>liaotian/bz/baozou13_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{82,101}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,101}</string>
+			</dict>
+			<key>liaotian/bz/baozou13_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,101},{82,101}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,101}</string>
+			</dict>
+			<key>liaotian/bz/baozou13_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,202},{82,101}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,101}</string>
+			</dict>
+			<key>liaotian/bz/baozou13_05.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,303},{82,101}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,101}</string>
+			</dict>
+			<key>liaotian/bz/baozou13_06.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,404},{82,101}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,101}</string>
+			</dict>
+			<key>liaotian/bz/baozou13_07.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,505},{82,101}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,101}</string>
+			</dict>
+			<key>liaotian/bz/baozou13_08.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,606},{82,101}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{82,101}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>baozou13.png</string>
+			<key>realTextureFileName</key>
+			<string>baozou13.png</string>
+			<key>size</key>
+			<string>{128,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>128</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>

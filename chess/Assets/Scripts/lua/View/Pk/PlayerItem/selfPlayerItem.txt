@@ -1,0 +1,283 @@
+﻿selfPlayerItem = {};
+local this = selfPlayerItem;
+
+this.chuPaiTime = 10.0;   --玩家出牌倒计时
+
+function selfPlayerItem.Awake(obj)
+    gameObject = obj;
+    transform = obj.transform;
+    message = obj:GetComponent("LuaBehaviour");
+
+    this.initComponent();
+end
+
+function selfPlayerItem.initComponent()
+	this.selfPlayerTran = transform;
+	this.selfPlayerHeadImg = transform:Find("info/head").gameObject:GetComponent("Image");
+	this.selfPlayerNameText = transform:Find("info/name").gameObject:GetComponent("Text");
+	this.selfPlayerGoldText = transform:Find("info/Text").gameObject:GetComponent("Text");
+
+	this.selfPlayerStateTran = transform:Find("state");
+	this.selfPlayerStateText = this.selfPlayerStateTran.gameObject:GetComponent("Text");
+
+	this.falseBtnTran = this.selfPlayerTran:Find("jiaoBtns/jiaBtn");
+	message:AddClick(this.falseBtnTran.gameObject,this.ClickFalseBtn);
+
+	this.genBtnTran = this.selfPlayerTran:Find("jiaoBtns/genBtn");
+	message:AddClick(this.genBtnTran.gameObject,this.ClickGenBtn);
+
+	this.guoBtnTran = this.selfPlayerTran:Find("jiaoBtns/guoBtn");
+	message:AddClick(this.guoBtnTran.gameObject,this.ClickGuoBtn);
+
+	this.chuBtnTran = this.selfPlayerTran:Find("chuBtn");
+	message:AddClick(this.chuBtnTran.gameObject,this.ClickChuBtn);
+
+	this.readyBtnTran = this.selfPlayerTran:Find("readyBtn");
+	message:AddClick(this.readyBtnTran.gameObject,this.ClickReadyBtn);
+
+	this.jiaoBtnTran = this.selfPlayerTran:Find("jiaoValueImg/sureBtn");
+	message:AddClick(this.jiaoBtnTran.gameObject,this.ClickJiaoBtn);
+
+	this.jiaoValueImgTran = this.selfPlayerTran:Find("jiaoValueImg");
+	this.jiaoValueNumsText = this.jiaoValueImgTran:Find("nums").gameObject:GetComponent("Text");
+	this.jiaoValueLabel = this.jiaoValueImgTran:Find("value").gameObject:GetComponent("Text");
+	this.jiaoValueImgValuesTran = this.jiaoValueImgTran:Find("values");
+
+	this.jiaoValueQuitBtn = this.jiaoValueImgTran:Find("closeBtn");
+	message:AddClick(this.jiaoValueQuitBtn.gameObject,this.ClickJiaoValueQuitBtn);
+
+	for i=1,this.jiaoValueImgValuesTran.childCount do
+		local tran = this.jiaoValueImgValuesTran.transform:Find("btn_"..tostring(i));
+		message:AddClick(tran.gameObject,this.ClickValueTranBtn);
+	end
+
+	this.stateTran = transform:Find("state");
+
+	this.jiaoImgTran = transform:Find("jiaoImg");
+	this.jiaoText = this.jiaoImgTran:Find("Text").gameObject:GetComponent("Text");
+
+	this.pkPaisTran = transform:Find("center/pkPais");
+	this.paiDefaultTran = this.pkPaisTran:Find("defaultPai");
+end
+
+function selfPlayerItem.OnEnable()
+	this.pos = 1;
+    this.pkPlayer = PkScene:GetInstance().players[1];
+
+    this.selfPlayerNameText.text = this.pkPlayer.name;
+    this.stateTran.gameObject:SetActive(false);
+	this.jiaoBtnTran.gameObject:SetActive(false);
+	this.chuBtnTran.gameObject:SetActive(false);
+	this.readyBtnTran.gameObject:SetActive(true);
+end
+
+function selfPlayerItem.Update()
+	if(this.isChuPai) then
+		this.chuPaiTimeNum = this.chuPaiTimeNum + Time.deltaTime;
+		local percent = this.chuPaiTimeNum / this.chuPaiTime;
+		this.progressImg.percent = percent;
+	end
+end
+
+--点击叫的界面的关闭按钮
+function selfPlayerItem.ClickJiaoValueQuitBtn(obj)
+	this.jiaoValueImgTran.gameObject:SetActive(false);
+	this.chuBtnTran.gameObject:SetActive(true);
+end
+
+--点击猜测是假的按钮
+function selfPlayerItem.ClickFalseBtn(obj)
+
+end
+
+--点击跟的按钮
+function selfPlayerItem.ClickGenBtn(obj)
+
+end
+
+--点击过的按钮
+function selfPlayerItem.ClickGuoBtn(obj)
+
+end
+
+--点击出牌的按钮
+function selfPlayerItem.ClickChuBtn(obj)
+	this.chuBtnTran.gameObject:SetActive(false);
+	this.jiaoValueImgTran.gameObject:SetActive(true);
+	
+	this.chuPais = {};
+	local num = 0;
+	for tran,flag in pairs(this.paisDir) do
+		if(flag == 1) then
+			num = num + 1;
+			local strs = string.split(tran.name,"_");
+			local pkPai = PkPai.New();
+			pkPai.type = tonumber(strs[1]);
+			pkPai.value = tonumber(strs[2]);
+			table.insert(this.chuPais,pkPai);
+		end
+	end
+
+	this.jiaoNum = num;
+	this.jiaoValue = 1;
+
+	this.jiaoValueNumsText.text = tostring(num).."个";
+	this.jiaoValueLabel.text = "A";
+	this.jiaoBtnTran.gameObject:SetActive(true);
+end
+
+--点击数字的按钮
+function selfPlayerItem.ClickValueTranBtn(obj)
+	local strs = string.split(obj.name,"_");
+	local value = strs[2];
+	this.jiaoValue = tonumber(value);
+	this.jiaoValueLabel.text = PkManager.getStrByPaiValue(value);
+end
+
+--点击准备按钮
+function selfPlayerItem.ClickReadyBtn(obj)
+	NetManager.SendReadyPk();
+end
+
+--点击纸牌按钮
+function selfPlayerItem.ClickPaiBtn(obj)
+	local flag = this.paisDir[obj.transform];
+	local pos = obj.transform.localPosition;
+	if(flag == 0) then
+		this.paisDir[obj.transform] = 1;
+		obj.transform.localPosition = Vector3.New(pos.x,pos.y+20.0,pos.z);
+	else
+		this.paisDir[obj.transform] = 0;
+		obj.transform.localPosition = Vector3.New(pos.x,pos.y-20.0,pos.z);
+	end
+end
+
+--点击叫牌按钮
+function selfPlayerItem.ClickJiaoBtn(obj)
+	this.jiaoValueImgTran.gameObject:SetActive(false);
+	NetManager.SendChuPai(this.jiaoNum,this.jiaoValue,this.chuPais);
+end
+
+--生成纸牌
+function selfPlayerItem.GeneratePais()
+	this.paisTran = {};
+	this.paisDir = {};
+
+	local childCount = this.paiDefaultTran.parent.childCount;
+	for i=0,childCount-1 do
+		local tran = this.paiDefaultTran.parent:GetChild(i);
+		if(tran ~= this.paiDefaultTran) then
+			GameObject.Destroy(tran.gameObject);
+		end
+	end
+
+	for key,pai in pairs(this.pkPlayer.pais) do
+		local paiObj = UIManager.newObject(this.paiDefaultTran.gameObject);
+		paiObj.transform.parent = this.pkPaisTran;
+		UIManager.reset(paiObj);
+		local name = tostring(pai.type).."_"..tostring(pai.value);
+		message:SetName(paiObj,name);
+		paiObj.transform.position = Vector3.New(0.0,0.0,0.0);
+		paiObj.transform.localScale = Vector3.New(1.0,1.0,1.0);
+		paiObj.transform.localEulerAngles = Vector3.New(0.0,0.0,180.0);
+		paiObj.gameObject:SetActive(true);
+
+		this.paisTran[name] = paiObj.transform;
+		this.paisDir[paiObj.transform] = 0;
+															
+		local lb = UnityEngine.UI.Button.GetClassType();
+		paiObj.gameObject:AddComponent(lb);
+		message:AddClick(paiObj.gameObject,this.ClickPaiBtn);
+	end
+
+	this.animNum = table.getn(this.pkPlayer.pais);
+	local originPos = PkManager.getPosByIndex(1,this.animNum);
+	for key,pai in pairs(this.pkPlayer.pais) do
+		local targetPos = PkManager.getPaiLocalPosition(key,originPos,1);
+		local name = tostring(pai.type).."_"..tostring(pai.value);
+		local paiTran = this.paisTran[name];
+		DoTweenManager.self:DoLocalMove(paiTran,targetPos,1.0,this.FaPaiAnimFinish,tonumber(key-1) * 1.0,1);
+	end
+end
+
+--发牌动画结束
+function selfPlayerItem.FaPaiAnimFinish(tran)
+	local name = tran.name;
+	local strs = string.split(name,"_");
+
+	this.animNum = this.animNum - 1;
+	local type = tonumber(strs[1]);
+	local value = tonumber(strs[2]);
+	local picName = PkManager.getPaiPicName(type,value);
+	UIManager.loadImage("paitex",picName,tran.gameObject);
+	if(this.animNum == 0) then
+		this.ShowChuPaiBtn(true);
+	end
+end
+
+--显示出牌按钮
+function selfPlayerItem.ShowChuPaiBtn(state)
+	this.chuBtnTran.gameObject:SetActive(state);
+end
+
+--显示玩家正在出牌时
+function selfPlayerItem.ShowDuringChuPai(state)
+	this.isChuPai = state;
+	this.progressTran.gameObject:SetActive(state);
+	this.chuPaiTimeNum = 0.0;
+	if(state == true) then
+		this.ShowPlayerState(2);
+	else
+		this.ShowPlayerState(0);
+	end	
+end
+
+--显示玩家出牌的动画
+function selfPlayerItem.ShowChuPaiAnim()
+	local chuPaiTrans = {};
+	local weiPaiTrans = {};
+	local childCount = this.pkPaisTran.childCount;
+	local index = 1;
+	for i=0,childCount-1 do
+		local tran = this.pkPaisTran:GetChild(i);
+		if(tran  ~= this.paiDefaultTran) then
+			local flag = this.paisDir[tran];
+			if(flag == 1) then
+				chuPaiTrans[tran.name] = tran;
+				this.paisTran[tran.name] = nil;
+				this.paisDir[tran] = nil;
+			else
+				weiPaiTrans[index] = tran;
+				index = index + 1;
+			end
+		end
+	end
+	EventManager.InvokeEvent(UIMovePaiTransToCenter,chuPaiTrans);
+	PkManager.resetPaisPos(weiPaiTrans,this.pkPlayer);
+end
+
+--显示玩家的状态
+function selfPlayerItem.ShowPlayerState(state)
+	this.stateTran.gameObject:SetActive(true);
+	if(state == 0) then
+		this.stateTran.gameObject:SetActive(false);
+	elseif(state == 1) then
+		this.stateText.text = "准备";
+	elseif(state == 2) then
+		this.stateText.text = "正在出牌";
+	end
+end
+
+--显示玩家的叫的对话框
+function selfPlayerItem.ShowJiaoImg(state)
+	this.jiaoImgTran.gameObject:SetActive(state);
+	this.pkPlayer = PkScene:GetInstance().players[1];
+	if(state == true) then
+		this.jiaoText.text = tostring(this.pkPlayer.jiaoNum).."个"..tostring(this.pkPlayer.jiaoValue);
+	end
+end
+
+--设置准备按钮的显示和隐藏
+function selfPlayerItem.SetReadyBtn(state)
+	this.readyBtnTran.gameObject:SetActive(state);
+end

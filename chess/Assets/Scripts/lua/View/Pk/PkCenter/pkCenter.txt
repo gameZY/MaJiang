@@ -1,0 +1,46 @@
+﻿pkCenter = {};
+local this = pkCenter;
+
+this.chuPaiTime = 10.0;
+
+function pkCenter.Awake(obj)
+    gameObject = obj;
+    transform = obj.transform;
+    message = obj:GetComponent("LuaBehaviour");
+
+    this.initComponent();
+end
+
+function pkCenter.initComponent()
+	this.timeClockTran = transform:Find("TimeClock");
+	this.timeClockText = this.timeClockTran:Find("Text").gameObject:GetComponent("Text");
+
+	this.pkPaisTran = transform:Find("pkPais");
+end
+
+function pkCenter.OnEnable()
+   
+end
+
+function pkCenter.Update()
+	
+end
+
+--将打出的牌移到中央
+function pkCenter.MovePaiTransToCenter(paiTrans)
+	for key,tran in pairs(paiTrans) do
+		tran.parent = this.pkPaisTran;
+		UIManager.loadImage("paitex","Back",tran.gameObject);
+		DoTweenManager.self:DoLocalMove(tran,Vector3.zero,1.0,this.MovePaiAnimFinish,0.0,1);
+	end
+end
+
+--移动位置中央的牌到玩家位置
+function pkCenter.MovePaiTransToPlayer(pos)
+	
+end
+
+--牌移动动画结束
+function pkCenter.MovePaiAnimFinish(tran)
+	
+end

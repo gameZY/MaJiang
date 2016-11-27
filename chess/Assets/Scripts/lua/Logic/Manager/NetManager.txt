@@ -1,0 +1,87 @@
+--网络管理器
+NetManager = {}
+local this = NetManager;
+
+--初始化
+function NetManager.OnInit()
+    this.RegisterCallBacks();
+    this.SendConnect();
+    EventManager.InvokeEvent(SetLoadText,nil);
+end
+
+--注册所有消息回包事件
+function NetManager.RegisterCallBacks()
+    EventManager.RegisterEvent(Connect, this.OnConnect);
+    EventManager.RegisterEvent(Exception, this.OnException);
+    EventManager.RegisterEvent(Disconnect, this.OnDisconnect);
+
+    loginMessage.RegisterCallBacks();
+    pkMessage.RegisterCallBacks();
+end
+
+--清除所有消息回包事件
+function NetManager.ClearCallBacks()
+    EventManager.UnRegisterEvent(Connect);
+    EventManager.UnRegisterEvent(Exception);
+    EventManager.UnRegisterEvent(Disconnect);
+
+    loginMessage.ClearCallBacks();
+    pkMessage.ClearCallBacks();
+end
+
+--发送消息函数
+function NetManager.SendMessage(msgId,proto)
+    local str = proto:SerializeToString();
+    local byte_buffer = ByteBuffer();
+    byte_buffer:WriteInt(msgId);
+    byte_buffer:WriteString(str);
+    NetworkManager:SendMessage(byte_buffer);
+end
+
+--解析消息函数
+function NetManager.ParseMessage(data)
+    local str = data:ReadString();
+    return str;
+end
+
+--发起连接
+function NetManager.SendConnect()
+    NetworkManager:SendConnect(Address,gameport);
+end
+
+--当连接建立时
+function NetManager.OnConnect()
+    log("Game Server connected!!");
+    this.SendLogin();
+end
+
+--异常断线
+function NetManager.OnException()
+    EventManager.InvokeEvent(UINormalTip,{"服务器发生错误,请重新登录",this.ResetLogin});
+   	error("OnException------->>>>");
+end
+
+--连接中断，或者被踢掉
+function NetManager.OnDisconnect()
+    EventManager.InvokeEvent(UINormalTip,{"连接不上服务器",this.ResetLogin});
+    error("OnDisconnect------->>>>");
+end
+
+--回包错误信息
+function NetManager.OnError(data)
+    local msg = this.ParseMessage(data);
+    log("========error====="..msg['msg']);
+    EventManager.InvokeEvent(UINormalTip,{msg['msg']});
+end
+
+--跑马灯消息回包
+function NetManager.OnMarquee(data)
+    local msg = this.ParseMessage(data);
+    log("========marquee====="..msg['msg']);
+    --MsgPromptManager.ShowMarquee(msg['msg'],1)
+end
+
+--重新登录
+function NetManager.ResetLogin()
+    UIManager.ResetLogin();
+end

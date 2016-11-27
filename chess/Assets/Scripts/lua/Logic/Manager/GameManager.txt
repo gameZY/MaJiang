@@ -1,0 +1,35 @@
+require "Define/GlobalFiles"
+
+GameManager = {};
+local this = GameManager;
+
+local transform;
+local gameObject;
+
+function GameManager.OnInitOK()
+    log("Game InitOk");
+    this.Init();
+end
+
+--初始化
+function GameManager.Init()
+    --初始化DoTween
+    DoTweenManager.self:InitDoTween();
+    --注册所有的panel加载回调事件
+    UIManager.RegPanelsFinishEvents();
+    --初始化UI
+    UIManager.initUI();
+    
+	UIManager.createPanel(LoadPanel);
+end
+
+function GameManager.Update()
+    HttpManager.Update();
+    TimerManager.Update();
+end
+
+--重新登录
+function GameManager.ResetLogin()
+    LuaHelper.RemoveNetManager();
+    NetManager.ClearCallBacks();
+end

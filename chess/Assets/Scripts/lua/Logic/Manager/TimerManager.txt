@@ -1,0 +1,42 @@
+--定时器管理器
+TimerManager = {};
+local this = TimerManager;
+
+local timers = {};
+
+--添加定时器
+function TimerManager.addTimer(timer)
+    log("=======add timer======");
+    table.insert(timers,timer);
+    timer:Start();
+end
+
+--移除定时器
+function TimerManager.removeTimer(timer)
+    timer:Stop();
+    local pos = 0;
+    for k,v in pairs(timers) do
+        if(v == timer) then
+            pos = k;
+        end
+    end
+    timer = nil;
+    log("======remove timer pos===="..tostring(pos));
+    timers[pos] = nil;
+end
+
+--定时器循环
+function TimerManager.Update()
+    for k,v in pairs(timers) do
+        v:Update();
+    end
+end
+
+--增加心跳包定时器
+function TimerManager.StartHeartTimer()
+	if(this.heartTimer ~= nil) then
+		this.removeTimer(this.heartTimer);
+	end
+	this.heartTimer = Timer.New(NetManager.SendHeart, 30, -1, false);
+	this.addTimer(this.heartTimer);
+end

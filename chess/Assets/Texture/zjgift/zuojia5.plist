@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>zjgift/zuojia_5_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{180,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{180,100}</string>
+			</dict>
+			<key>zjgift/zuojia_5_10.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{180,0},{180,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{180,100}</string>
+			</dict>
+			<key>zjgift/zuojia_5_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{360,0},{180,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{180,100}</string>
+			</dict>
+			<key>zjgift/zuojia_5_3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{540,0},{180,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{180,100}</string>
+			</dict>
+			<key>zjgift/zuojia_5_4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{720,0},{180,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{180,100}</string>
+			</dict>
+			<key>zjgift/zuojia_5_5.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{900,0},{180,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{180,100}</string>
+			</dict>
+			<key>zjgift/zuojia_5_6.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,100},{180,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{180,100}</string>
+			</dict>
+			<key>zjgift/zuojia_5_7.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{180,100},{180,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{180,100}</string>
+			</dict>
+			<key>zjgift/zuojia_5_8.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{360,100},{180,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{180,100}</string>
+			</dict>
+			<key>zjgift/zuojia_5_9.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{540,100},{180,100}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{180,100}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>zuojia5.png</string>
+			<key>realTextureFileName</key>
+			<string>zuojia5.png</string>
+			<key>size</key>
+			<string>{1024,256}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>256</integer>
+		</dict>
+	</dict>
+</plist>

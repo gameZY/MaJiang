@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>liaotian/bz/baozou19_01.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{102,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{102,102}</string>
+			</dict>
+			<key>liaotian/bz/baozou19_02.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,102},{102,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{102,102}</string>
+			</dict>
+			<key>liaotian/bz/baozou19_03.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,204},{102,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{102,102}</string>
+			</dict>
+			<key>liaotian/bz/baozou19_04.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,306},{102,102}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{102,102}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>baozou19.png</string>
+			<key>realTextureFileName</key>
+			<string>baozou19.png</string>
+			<key>size</key>
+			<string>{128,512}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>128</integer>
+			<key>height</key>
+			<integer>512</integer>
+		</dict>
+	</dict>
+</plist>
