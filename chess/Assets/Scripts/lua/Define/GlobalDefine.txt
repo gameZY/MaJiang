@@ -1,0 +1,13 @@
+json = require "cjson"
+util = require "core/3rd/cjson/util"
+
+Util = Teacher.Util;
+AppConst = Teacher.AppConst;
+LuaHelper = Teacher.LuaHelper;
+ByteBuffer = Teacher.ByteBuffer;
+
+ResManager = LuaHelper.GetResManager();
+PanelManager = LuaHelper.GetPanelManager();
+MusicManager = LuaHelper.GetMusicManager();
+--NetworkManager = LuaHelper.GetNetManager();
+EventSystem = UnityEngine.EventSystems.EventSystem;

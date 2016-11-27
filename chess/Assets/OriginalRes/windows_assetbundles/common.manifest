@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 2899262597
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 02761deb4a6db8e6351094db7d6cdb7b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 00ffc586b3c4c12c72c7fed589b81235
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Texture/common/headMask.png
+- Assets/Texture/common/headedge_01.png
+- Assets/Texture/common/HuanChong.png
+- Assets/Texture/common/back.png
+Dependencies: []

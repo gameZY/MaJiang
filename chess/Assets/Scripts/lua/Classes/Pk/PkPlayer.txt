@@ -1,0 +1,16 @@
+﻿--Pk玩家类
+PkPlayer = {
+	pos = 0,
+    name = nil,
+	state = 0,
+	pais = {},
+	jiaoNum = 0,
+	jiaoValue = 0,
+};
+PkPlayer.__index = PkPlayer;
+
+function PkPlayer:New()
+    local self = {};
+    setmetatable(self, PkPlayer);
+    return self;
+end

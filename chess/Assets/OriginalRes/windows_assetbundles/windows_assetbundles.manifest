@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: paitex
+      Dependencies: {}
+    Info_1:
+      Name: mainpanel
+      Dependencies: {}
+    Info_2:
+      Name: pkpanel
+      Dependencies:
+        Dependency_0: paitex
+    Info_3:
+      Name: loadpanel
+      Dependencies: {}
+    Info_4:
+      Name: lua
+      Dependencies: {}

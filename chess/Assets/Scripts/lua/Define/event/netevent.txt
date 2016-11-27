@@ -1,0 +1,14 @@
+Connect           = '101';	--连接服务器
+Exception         = '102';	--异常掉线
+Disconnect        = '103';	--正常断线
+
+Heart             = '200';  --心跳包
+Login 			  = '201';	--登陆
+ReLogin           = '202';  --重复登录
+Logout            = '203';  --注销退出
+
+EnterGame         = '301';  --进入游戏匹配玩家
+ReadyPk           = '302';  --准备
+FaPai             = '303';  --发牌
+Decide            = '304';  --决定假，跟，过
+ChuPai            = '305';  --出牌

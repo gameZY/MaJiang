@@ -1,0 +1,27 @@
+﻿--PK场景
+PkScene = {
+	sceneId = 0,
+	selfPos = 0,
+	chuPaiPos = 0,
+	players = {},
+}
+local this = PkScene;
+
+PkScene.__index = PkScene;
+
+function PkScene:New()
+    local self = {};
+    setmetatable(self, PkScene);
+    return self;
+end
+
+function PkScene:GetInstance()
+    if(self.m_scene == nil) then
+        self.m_scene = PkScene:New();
+    end
+    return self.m_scene;
+end
+
+function PkScene:Clear()
+	self.m_scene = nil;
+end

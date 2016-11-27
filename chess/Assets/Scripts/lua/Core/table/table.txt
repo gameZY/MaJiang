@@ -1,0 +1,40 @@
+function table.getKeyIndex(tb,_key)
+    if(tb ~= nil) then
+        local index = 0;
+        for key,value in pairs(tb) do
+            index = index + 1;
+            if(key == _key) then
+                return index;
+            end
+        end
+    end
+
+    return 0
+end
+
+function table.ContainsKey(_table,key)
+    for _,value in pairs(_table) do
+        if(_ == key) then
+            return true;
+        end
+    end
+    return false;
+end
+
+function table.ContainsValue(_table,_value)
+    for _,value in pairs(_table) do
+        if(value == _value) then
+            return true;
+        end
+    end
+    return false;
+end
+
+function table.GetValueIndex(_table,_value)
+    for _,value in pairs(_table) do
+        if(value == _value) then
+            return _;
+        end
+    end
+    return -1;
+end

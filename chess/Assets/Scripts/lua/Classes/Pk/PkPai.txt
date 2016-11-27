@@ -1,0 +1,12 @@
+﻿--Pk牌类
+PkPai = {
+    type = 0,
+    value = 0,
+};
+PkPai.__index = PkPai;
+
+function PkPai:New()
+    local self = {};
+    setmetatable(self, PkPai);
+    return self;
+end

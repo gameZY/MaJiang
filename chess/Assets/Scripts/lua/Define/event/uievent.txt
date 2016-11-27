@@ -1,0 +1,20 @@
+--loadpanel事件
+SetLoadText = "300000"  --设置加载界面文字
+SetLoadActive = "300001"  --设置加载界面显示或隐藏
+
+--tips
+ShowTip = "300300"   --显示提示框
+HiddenTip = "300301" --隐藏normal提示框
+UINormalTip = "300302"  --normal提示框
+UIDoubleTip = "300303" --double提示框
+
+--pk事件
+UISetPkState = "400001" --设置pk状态
+UIPkFaPai = "400002"   --pk发牌
+UIShowReadyBtn = "400003"  --pk准备
+UISetChuPaiRoot = "400004" --显示出牌界面
+UIShowJiaoImg = "400005"  --显示叫的对话框界面
+UIShowDuringChuPai = "400006" --显示正在出牌
+UIShowChuPaiAnim = "400007"  --显示出牌的动画
+UIMovePaiTransToCenter = "400008" --将出的牌移动到中央
+UIMovePaiTransToPlayer = "400009" --将中央的牌移动到玩家的位置

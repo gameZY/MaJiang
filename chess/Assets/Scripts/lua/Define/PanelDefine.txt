@@ -1,0 +1,10 @@
+PanelFinishNames = {
+    loadpanel = "2001",
+    mainpanel = "2002",
+    pkpanel = "2003",
+}
+
+LoadPanel = "loadpanel"
+
+MainPanel = "mainpanel"
+PkPanel = "pkpanel"

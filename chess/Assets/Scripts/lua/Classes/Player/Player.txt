@@ -1,0 +1,19 @@
+--玩家类
+Player = {
+    uid = 0,
+    name = nil,
+};
+Player.__index = Player;
+
+function Player:New()
+    local self = {};
+    setmetatable(self, Player);
+    return self;
+end
+
+function Player:GetInstance()
+    if(self.m_player == nil) then
+        self.m_player = Player:New();
+    end
+    return self.m_player;
+end
