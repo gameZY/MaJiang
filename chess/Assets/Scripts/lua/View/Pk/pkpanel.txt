@@ -1,4 +1,3 @@
---pkΩÁ√Ê
 pkpanel = {};
 local this = pkpanel;
 
