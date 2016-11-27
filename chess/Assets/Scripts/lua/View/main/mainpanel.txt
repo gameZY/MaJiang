@@ -1,0 +1,30 @@
+mainpanel = {};
+local this = mainpanel;
+
+local gameObject;
+local transform;
+local message;
+
+function mainpanel.Awake(obj)
+    gameObject = obj;
+    transform = obj.transform;
+    message = obj:GetComponent("LuaBehaviour");
+    this.InitComponent();
+end
+
+function mainpanel.Start()
+    
+end
+
+function mainpanel.InitComponent()
+    this.enterGameBtn = transform:Find("bottom/enterGameBtn");
+    message:AddClick(this.enterGameBtn.gameObject,this.ClickEnterGameBtn);
+end
+
+function mainpanel.OnEnable()
+    
+end
+
+function mainpanel.ClickEnterGameBtn(obj)
+    NetManager.SendEnterGame();
+end

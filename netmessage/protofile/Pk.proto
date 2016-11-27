@@ -1,0 +1,93 @@
+package com.HHGame.Pk;
+
+//pk玩家
+message PkPlayer
+{
+    optional string name = 1;
+	optional int32 pos = 2;
+}
+
+//pk牌
+message PkPai
+{
+	required int32 pos = 1;
+	required int32 type = 2;
+	required int32 value = 3;
+}
+
+//进入游戏匹配请求 301
+message EnterGameRequest
+{
+	required bool state = 1;
+}
+
+//匹配后回包 301
+message EnterGameResponse
+{
+	required bool state = 1;
+	repeated PkPlayer players = 3;
+}
+
+//请求准备 302
+message ReadyPkRequest
+{
+    required bool state = 1;
+}
+
+//准备后回包 302
+message ReadyPkResponse
+{
+    required int32 index = 1;
+}
+
+//发牌回包 303
+message FaPaiResponse
+{
+	required bool state = 1;
+	required int32 first = 2;  //谁先出牌
+	repeated PkPai pais = 3;
+}
+
+//请求假(1)，过(2)，跟(3) 304
+message DecideRequest
+{
+	required int32 decide = 1;
+}
+
+//假，过，跟 回包 304
+message DecideResponse
+{
+	required int32 decide = 1;
+	optional bool state = 2;
+	optional int32 pos = 3;   //给谁
+	optional bool addOrRemove = 4;  //是增加还是减少牌
+	optional PkPai pais = 5;  //牌
+}
+
+//出牌 305
+message ChuPaiRequest
+{
+	required int32 num = 2;
+	required int32 value = 3;
+	required string pais = 4;
+}
+
+//出牌回包 305
+message ChuPaiResponse
+{
+	required int32 pos = 1;
+	required int32 num = 2;
+	required int32 value = 3;
+}
+
+//该谁出牌的回包 306
+message ChuPaiPos
+{
+	required int32 pos = 1;
+}
+
+//该谁决定 307
+message DecidePos
+{
+	required int32 pos = 1;
+}

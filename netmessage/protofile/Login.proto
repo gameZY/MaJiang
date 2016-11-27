@@ -1,0 +1,26 @@
+package com.HHGame.Login;
+
+//请求心跳包
+message HeartRequest
+{
+	required bool state = 1;
+}
+
+//心跳包回包
+message HeartResponse
+{
+	required bool state = 1;
+}
+
+//请求登陆 201
+message LoginRequest
+{
+	required int32 uid = 1;
+	required string name = 2;
+}
+
+//登陆回包 201
+message LoginResponse
+{
+	required bool state = 1;
+}

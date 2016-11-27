@@ -1,0 +1,96 @@
+ManifestFileVersion: 0
+CRC: 552405132
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c57e18f00d09dcc12c7ea05e94f96661
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1033bf7ddfd4c6d43e7a6382c0a0a61a
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/OriginalRes/lua/Logic/ModelManager.txt
+- Assets/OriginalRes/lua/System/Event.txt
+- Assets/OriginalRes/lua/Data/male/integumentarysystem.txt
+- Assets/OriginalRes/lua/System/Plane.txt
+- Assets/OriginalRes/lua/Classes/MarqueeInfo.txt
+- Assets/OriginalRes/lua/System/Color.txt
+- Assets/OriginalRes/lua/View/loginpanel.txt
+- Assets/OriginalRes/lua/Logic/MsgPromptManager.txt
+- Assets/OriginalRes/lua/Logic/ModelSplitManager.txt
+- Assets/OriginalRes/lua/Logic/FileManager.txt
+- Assets/OriginalRes/lua/Core/table/table.txt
+- Assets/OriginalRes/lua/System/Main.txt
+- Assets/OriginalRes/lua/Logic/HttpManager.txt
+- Assets/OriginalRes/lua/Logic/StrangeManager.txt
+- Assets/OriginalRes/lua/System/Set.txt
+- Assets/OriginalRes/lua/View/mappanel.txt
+- Assets/OriginalRes/lua/Core/globalfiles.txt
+- Assets/OriginalRes/lua/System/Vector2.txt
+- Assets/OriginalRes/lua/View/toppanel.txt
+- Assets/OriginalRes/lua/System/Bounds.txt
+- Assets/OriginalRes/lua/View/personpanel.txt
+- Assets/OriginalRes/lua/System/strict.txt
+- Assets/OriginalRes/lua/events.txt
+- Assets/OriginalRes/lua/Core/global/globaldefine.txt
+- Assets/OriginalRes/lua/System/Vector3.txt
+- Assets/OriginalRes/lua/View/loadpanel.txt
+- Assets/OriginalRes/lua/System/Touch.txt
+- Assets/OriginalRes/lua/System/Quaternion.txt
+- Assets/OriginalRes/lua/System/Layer.txt
+- Assets/OriginalRes/lua/System/Raycast.txt
+- Assets/OriginalRes/lua/System/Timer.txt
+- Assets/OriginalRes/lua/Core/net/loginMessage.txt
+- Assets/OriginalRes/lua/System/class.txt
+- Assets/OriginalRes/lua/View/Network.txt
+- Assets/OriginalRes/lua/View/guidepanel.txt
+- Assets/OriginalRes/lua/Logic/NetManager.txt
+- Assets/OriginalRes/lua/eventlib.txt
+- Assets/OriginalRes/lua/Core/event/uievent.txt
+- Assets/OriginalRes/lua/Core/net/gateMessage.txt
+- Assets/OriginalRes/lua/System/List.txt
+- Assets/OriginalRes/lua/Core/time/timefunc.txt
+- Assets/OriginalRes/lua/Logic/DownloadManager.txt
+- Assets/OriginalRes/lua/Classes/PkValue.txt
+- Assets/OriginalRes/lua/Data/datas.txt
+- Assets/OriginalRes/lua/System/Global.txt
+- Assets/OriginalRes/lua/View/pkpanel.txt
+- Assets/OriginalRes/lua/Core/random/random.txt
+- Assets/OriginalRes/lua/Core/net/rankMessage.txt
+- Assets/OriginalRes/lua/System/Math.txt
+- Assets/OriginalRes/lua/View/rankpanel.txt
+- Assets/OriginalRes/lua/Classes/Player.txt
+- Assets/OriginalRes/lua/listener.txt
+- Assets/OriginalRes/lua/Classes/User.txt
+- Assets/OriginalRes/lua/Core/string/string.txt
+- Assets/OriginalRes/lua/System/Ray.txt
+- Assets/OriginalRes/lua/Logic/TimerManager.txt
+- Assets/OriginalRes/lua/View/tipspanel.txt
+- Assets/OriginalRes/lua/View/strangepanel.txt
+- Assets/OriginalRes/lua/View/gatepanel.txt
+- Assets/OriginalRes/lua/Data/pintu/splitModel.txt
+- Assets/OriginalRes/lua/Logic/EventManager.txt
+- Assets/OriginalRes/lua/Data/male/skeletalsystem.txt
+- Assets/OriginalRes/lua/System/Vector4.txt
+- Assets/OriginalRes/lua/Core/math/method.txt
+- Assets/OriginalRes/lua/Core/log/log.txt
+- Assets/OriginalRes/lua/System/Coroutine.txt
+- Assets/OriginalRes/lua/Classes/TimeTicker.txt
+- Assets/OriginalRes/lua/View/mainpanel.txt
+- Assets/OriginalRes/lua/Logic/UIManager.txt
+- Assets/OriginalRes/lua/Core/net/pkMessage.txt
+- Assets/OriginalRes/lua/View/d3camerasplit.txt
+- Assets/OriginalRes/lua/Core/event/netevent.txt
+- Assets/OriginalRes/lua/Core/3rd/cjson/util.txt
+- Assets/OriginalRes/lua/View/splitpanel.txt
+- Assets/OriginalRes/lua/Core/global/panelname.txt
+- Assets/OriginalRes/lua/System/Test.txt
+- Assets/OriginalRes/lua/System/Wrap.txt
+- Assets/OriginalRes/lua/View/d3camera.txt
+- Assets/OriginalRes/lua/Logic/GameManager.txt
+- Assets/OriginalRes/lua/View/animpanel.txt
+- Assets/OriginalRes/lua/System/Time.txt
+Dependencies: []
