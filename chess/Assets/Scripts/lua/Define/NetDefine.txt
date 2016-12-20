@@ -1,7 +1,0 @@
-localAddress = "192.168.1.77";
-remoteAddress = "219.234.3.96";
-webport = "8081";
-gameport = "8100";
-
-Address = localAddress;
-weburl = "http://"..Address..":"..webport.."/web/";
